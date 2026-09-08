@@ -25,6 +25,7 @@ export const Route = createFileRoute("/")({
 
 const navLinks = ["New Arrivals", "Shop", "Collections", "Our Story"];
 const categories = ["Ceramics", "Textiles", "Lighting", "Furniture"];
+const categoryPositions = ["left-0", "-left-full", "-left-[200%]", "-left-[300%]"];
 const products = [
   { name: "Esker Sculptural Vase", price: "$148", position: "left-top" },
   { name: "Mora Bouclé Cushion", price: "$96", position: "right-top" },
@@ -105,7 +106,7 @@ function FeaturedCategories() {
         <div className="grid grid-cols-2 gap-2 lg:grid-cols-4 lg:gap-4">
           {categories.map((category, index) => (
             <a href="#bestsellers" key={category} className="group reveal-on-scroll relative aspect-[3/4] overflow-hidden bg-muted">
-              <img src={categoriesImage} alt={`${category} collection`} width={1920} height={1024} loading="lazy" className="absolute h-full max-w-none object-cover transition-transform duration-500 group-hover:scale-105" style={{ width: "400%", left: `${index * -100}%` }} />
+              <img src={categoriesImage} alt={`${category} collection`} width={1920} height={1024} loading="lazy" className={cn("absolute h-full w-[400%] max-w-none object-cover transition-transform duration-500 group-hover:scale-105", categoryPositions[index])} />
               <div className="absolute inset-0 bg-gradient-to-t from-overlay to-transparent" />
               <div className="absolute inset-x-0 bottom-0 p-4 text-hero-foreground sm:p-6"><h3 className="font-serif text-2xl sm:text-3xl">{category}</h3><span className="mt-2 inline-block text-[0.62rem] font-semibold uppercase tracking-[0.16em]">Explore collection</span></div>
             </a>
