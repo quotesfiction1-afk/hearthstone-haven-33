@@ -60,7 +60,7 @@ function Header({ cartCount }: { cartCount: number }) {
   }, []);
 
   return (
-    <header className={cn("fixed inset-x-0 top-8 z-40 border-b border-transparent transition-all duration-500", scrolled || menuOpen ? "border-border bg-background text-foreground" : "text-hero-foreground")}>
+    <header className={cn("sticky top-0 z-40 border-b border-transparent transition-all duration-500", scrolled || menuOpen ? "border-border bg-background text-foreground" : "text-hero-foreground")}>
       <div className="mx-auto grid h-18 max-w-[1600px] grid-cols-[1fr_auto_1fr] items-center px-5 lg:px-10">
         <nav className="hidden items-center gap-7 lg:flex" aria-label="Main navigation">
           {navLinks.map((link) => <a key={link} href={link === "Our Story" ? "#story" : "#shop"} className="text-[0.68rem] font-medium uppercase tracking-[0.14em] transition-opacity hover:opacity-55">{link}</a>)}
@@ -165,5 +165,17 @@ function Footer() {
 
 function Storefront() {
   const [cartCount, setCartCount] = useState(0);
-  return <main><AnnouncementBar /><Header cartCount={cartCount} /><Hero /><FeaturedCategories /><Bestsellers onAdd={() => setCartCount((count) => count + 1)} /><Story /><Footer /></main>;
+  return (
+    <main>
+      <AnnouncementBar />
+      <Header cartCount={cartCount} />
+      <div className="-mt-18">
+        <Hero />
+      </div>
+      <FeaturedCategories />
+      <Bestsellers onAdd={() => setCartCount((count) => count + 1)} />
+      <Story />
+      <Footer />
+    </main>
+  );
 }
