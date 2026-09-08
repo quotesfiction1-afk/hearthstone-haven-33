@@ -168,8 +168,8 @@ function Storefront() {
   return (
     <main>
       <AnnouncementBar />
-      <div className="relative -mt-18">
-        <Header cartCount={cartCount} />
+      <Header cartCount={cartCount} />
+      <div className="-mt-18">
         <Hero />
       </div>
       <FeaturedCategories />
