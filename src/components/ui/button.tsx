@@ -1,6 +1,6 @@
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
-import type { ButtonHTMLAttributes } from "react";
+import { forwardRef, type ButtonHTMLAttributes } from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -12,7 +12,10 @@ const buttonVariants = cva(
         primary: "border-primary bg-primary text-primary-foreground hover:bg-accent hover:text-accent-foreground",
         light: "border-primary-foreground bg-primary-foreground text-primary hover:bg-transparent hover:text-primary-foreground",
         outline: "border-foreground/30 bg-transparent text-foreground hover:bg-primary hover:text-primary-foreground",
-        ghost: "border-transparent bg-transparent px-2 text-foreground hover:text-accent",
+        ghost: "border-transparent bg-transparent px-2 text-foreground hover:bg-secondary",
+        secondary: "border-secondary bg-secondary text-secondary-foreground hover:bg-accent",
+        destructive: "border-destructive bg-destructive text-destructive-foreground hover:opacity-90",
+        link: "min-h-0 border-transparent bg-transparent px-0 text-foreground underline-offset-4 hover:underline",
       },
       size: {
         default: "h-12",
@@ -24,12 +27,15 @@ const buttonVariants = cva(
   },
 );
 
-type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
+export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
   VariantProps<typeof buttonVariants> & { asChild?: boolean };
 
-function Button({ className, variant, size, asChild = false, ...props }: ButtonProps) {
-  const Comp = asChild ? Slot : "button";
-  return <Comp className={cn(buttonVariants({ variant, size }), className)} {...props} />;
-}
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant, size, asChild = false, ...props }, ref) => {
+    const Comp = asChild ? Slot : "button";
+    return <Comp ref={ref} className={cn(buttonVariants({ variant, size }), className)} {...props} />;
+  },
+);
+Button.displayName = "Button";
 
 export { Button, buttonVariants };
