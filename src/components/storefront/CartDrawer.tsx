@@ -95,7 +95,7 @@ export function CartDrawer({ open, onOpenChange }: { open: boolean; onOpenChange
                   <span className="font-serif text-xl">{formatMoney(totalPrice, currency)}</span>
                 </div>
                 <p className="text-xs text-muted-foreground">Shipping and taxes calculated at checkout.</p>
-                <Button onClick={handleCheckout} className="w-full" size="lg" disabled={isLoading || isSyncing}>
+                <Button onClick={handleCheckout} className="w-full" size="default" disabled={isLoading || isSyncing}>
                   {isLoading || isSyncing ? (
                     <Loader2 className="h-4 w-4 animate-spin" />
                   ) : (
